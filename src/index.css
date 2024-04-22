@@ -242,6 +242,23 @@
         transform: translate(-50%, -50%);
     }
 
+    @keyframes glowing {
+        0% {
+            box-shadow: hsl(150, 100%, 66%);
+        }
+        50% {
+            box-shadow: 0 0 20px 10px hsla(150, 100%, 66%, 0.7);
+        }
+        100% {
+            box-shadow: hsl(150, 100%, 66%);
+        }
+    }
+
+    .dice-container:hover {
+        animation: glowing 2.5s infinite;
+        cursor: pointer;
+    }
+
     .dice-container img {
         margin-top: 8px;
     }
