@@ -27,7 +27,7 @@ function App() {
         ) : adviceData ? (
           <>
             <h1 className="advice-number">
-              ADVICE <span>{adviceData?.slip?.id}</span>
+              ADVICE #<span>{adviceData?.slip?.id}</span>
             </h1>
             <div className="advice-text">
               <p>"{adviceData?.slip?.advice}"</p>
