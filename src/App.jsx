@@ -1,27 +1,48 @@
-import { useState } from 'react' 
-import './App.css'
-import dice from "../public/images/icon-dice.svg"
+import { useState } from "react";
+import "./App.css";
+import dice from "../public/images/icon-dice.svg";
 
 function App() {
-  
+  const [adviceData, setAdviceData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getAdvice = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("https://api.adviceslip.com/advice");
+      const data = await res.json();
+      setAdviceData(data);
+    } catch (error) {
+      console.error("error fetching data:", error);
+    } finally {
+      setIsLoading(false)
+    }
+  };
 
   return (
-    <div className='advice'>
+    <div className="advice">
       <div className="advice-container">
-        <h1 className='advice-number'>ADVICE #117</h1>
-        <div className='advice-text'>
-          <p>
-            "It is easy to sit up and take notice,
-            what's dificult is getting up and taking action."
-          </p>
-        </div>
-        <div className='pattern-divider'></div>
-        <div className='dice-container'>
+        {isLoading ? (
+          <p id="loading">Loading...</p>
+        ) : adviceData ? (
+          <>
+            <h1 className="advice-number">
+              ADVICE <span>{adviceData?.slip?.id}</span>
+            </h1>
+            <div className="advice-text">
+              <p>"{adviceData?.slip?.advice}"</p>
+            </div>
+          </>
+        ) : (
+          <p id="get-advice">Click the dice below to get advice.</p>
+        )}
+        <div className="pattern-divider"></div>
+        <button className="dice-container" onClick={getAdvice}>
           <img src={dice} alt="" />
-        </div>
+        </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
