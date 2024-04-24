@@ -38,7 +38,7 @@ function App() {
         )}
         <div className="pattern-divider"></div>
         <button className="dice-container" onClick={getAdvice}>
-          <img src={dice} alt="" />
+          <img src={dice} alt="Image of a dark blue die" />
         </button>
       </div>
     </div>
